@@ -1,0 +1,28 @@
+<html>
+    <head>
+
+        <script>
+            const eventSource = new EventSource('http://localhost:3010/connect');
+            eventSource.onmessage = (event) => {
+                const p = document.createElement('p');
+                p.innerText = `${event.type} - ${event.data} - ${event.timeStamp}`;
+                
+                const events = document.getElementById('events');
+
+                if (events.children.length > 10) {
+                    events.removeChild(events.firstChild);
+                }
+
+                events.appendChild(p);
+            };
+            
+            </script>
+
+    </head>
+
+    <body>
+        <h3>Events:</h3>
+        <div id="events"></div>
+    </body>
+
+</html>
